@@ -434,9 +434,9 @@ var reformatDate = function (date) {
                 if (rsp.status != 'success')
                 {
                     var pendingChanges = rsp.pendingChanges;
-                    if (pendingChanges > 3)
+                    if (pendingChanges.length > 3)
                     {
-                        cntr.find('.pending-changes').text("Changes since last commit " + pendingChanges);
+                        cntr.find('.pending-changes').text("Changes since last commit " + pendingChanges.length);
                         cntr.find('.pending-changes').addClass('delayed')
                     }
                 }
