@@ -538,7 +538,6 @@ var reformatDate = function (date) {
                 cntr.find('.text-status-server').text(rsp.database);
             }if (id == "ingestion") {
                 cntr.addClass('consumption');
-                cntr.removeClass('.text-status-server');
                 cntr.addClass('.text-status-server-consumption');
                 cntr.find('.text-status-server').text(rsp.ingestion);
             }
