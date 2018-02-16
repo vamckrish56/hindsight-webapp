@@ -151,32 +151,20 @@ a {
     background-color: #255e11;
 }
 
-.default-build.success.coverage {
+.default-build.coverage {
     background-color: #255e11;
     text-align: center;
 }
-.default-build.success.vulnerabilities {
+.default-build.vulnerabilities {
     background-color: #f44271;
     text-align: center;
 }
-.default-build.success.bugs {
+.default-build.bugs {
     background-color: #f44141;
     text-align: center;
 }
-.default-build.success.codeSmells {
+.default-build.codeSmells {
     background-color: orange;
-    text-align: center;
-}
-.default-build.success.uds.up {
-    background-color: #255e11;
-    text-align: center;
-}
-.default-build.success.uds.down {
-    background-color: #a5a19f;
-    text-align: center;
-}
-.default-build.success.uds.starting {
-    background-color: #f48541;
     text-align: center;
 }
 

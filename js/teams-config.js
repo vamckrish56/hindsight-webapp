@@ -5,12 +5,12 @@ var config = {
         builds: {
             id: 'Stats',
             displayName: "Fact Check",
-            buildInfoURL: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
+            buildInfoURL: "http://localhost:5000/api/sonar",
             builds: [
-                                {id:'Coverage',branch:'develop'},
-                                {id:'Bugs',branch:'develop'},
-                                {id:'Vulnerabilities',branch:'develop'},
-                                {id:'CodeSmells',branch:'develop'}
+                                {id:'coverage',branch:'develop'},
+                                {id:'bugs',branch:'develop'},
+                                {id:'vulnerabilities',branch:'develop'},
+                                {id:'codeSmells',branch:'develop'}
             ]
         }
     },

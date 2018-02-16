@@ -454,54 +454,38 @@ var reformatDate = function (date) {
     };
 
     var handleDefaultResponse = function (rsp, containerId, config, buildId, buildBranch) {
-                var id = rsp.buildTypeId,
+                var id = buildId,
                     cntr = $(containerId).find('#' + id),
                     lastChange = parseTCDate(rsp.finishDate);
 
-                cntr.find('.project-name').text(rsp.buildType.projectName + " (" + rsp.state + ")");
+                cntr.find('.project-name').text(buildId);
                 cntr.find('.pending-changes').text('');
                 cntr.find('.pending-changes').removeClass('delayed')
                 if(id=="UDS") {
-                    cntr.find('.build-name').text(shrinkText(rsp.buildType.name + (rsp.branch ? ' - ' + rsp.branchName : ''), 40));
+                    cntr.find('.build-name').text(shrinkText(buildId + (rsp.branch ? ' - ' + rsp.branch : ''), 40));
                 } else {
-                    cntr.find('.build-name').text(shrinkText(rsp.buildType.name /* (rsp.branchName ? ' - ' + rsp.branchName : ''),*/, 40));
+                    cntr.find('.build-name').text(shrinkText(buildId/* (rsp.branchName ? ' - ' + rsp.branchName : ''),*/, 40));
                 }
                         cntr.removeClass('overtime');
                         cntr.removeClass('running')
-                        cntr.find('.build-date').text(lastChange ? "finished " + reformatDate(lastChange) : "unknown");
+                        cntr.find('.build-date').text(lastChange ? "finished " + reformatDate(lastChange) : "");
 
-                cntr.find('.committers-default').text(getUniqueCommiters(rsp.lastChanges));
-                cntr.find('.text-status-default').text(rsp.statusText);
+                cntr.find('.committers-default').text(rsp.commitedBy);
                 cntr.removeClass('old success failure hidden').addClass(getStatusClass(rsp.status));
 
-                if (id == "Coverage") {
+                if (id == "coverage") {
                     cntr.addClass('coverage');
+                    cntr.find('.text-status-default').text(rsp.coverage);
                 }
-                if (id == "Vulnerabilities") {
+                if (id == "vulnerabilities") {
                     cntr.addClass('vulnerabilities');
-                }if (id == "Bugs") {
+                    cntr.find('.text-status-default').text(rsp.vulnerabilities);
+                }if (id == "bugs") {
                     cntr.addClass('bugs');
-                }if (id == "CodeSmells") {
+                    cntr.find('.text-status-default').text(rsp.bugs);
+                }if (id == "codeSmells") {
                     cntr.addClass('codeSmells');
-                }if(id == "UDS") {
-                    cntr.addClass('uds');
-
-                    if(rsp.statusText == "UP") {
-                        cntr.removeClass("down");
-                        cntr.removeClass("starting");
-                        cntr.addClass("up");
-                    }
-                    if(rsp.statusText == "DOWN") {
-                        cntr.removeClass("up");
-                        cntr.removeClass("starting");
-                        cntr.addClass("down");
-                    }
-                    if(rsp.statusText == "STARTING") {
-                        cntr.removeClass("down");
-                        cntr.removeClass("starting");
-                        cntr.addClass("starting");
-                    }
-
+                    cntr.find('.text-status-default').text(rsp.codeSmells);
                 }
 
             };
