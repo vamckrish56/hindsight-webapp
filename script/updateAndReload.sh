@@ -18,7 +18,7 @@ fi
 if [ "$cmd" != "chromium-browser" ]; then
 	echo "Starting browser..."
 	export DISPLAY=":0"
-	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk file://${TC_HOME}/index.html?suite=UDS-DFW &
+	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir=/Users/krishna/projects/hindsight-webapp --noerrdialogs --disable-session-crashed-bubble --disable-infobars file://${TC_HOME}/index.html?suite=UDS-DFW &
 	echo $! > chromium.pid
 fi
 

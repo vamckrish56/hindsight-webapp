@@ -5,13 +5,12 @@ var config = {
         builds: {
             id: 'Stats',
             displayName: "Fact Check",
-            buildInfoURL: "http://localhost:5000/app/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
+            buildInfoURL: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
             builds: [
                                 {id:'Coverage',branch:'develop'},
                                 {id:'Bugs',branch:'develop'},
                                 {id:'Vulnerabilities',branch:'develop'},
-                                {id:'CodeSmells',branch:'develop'},
-                                {id:'UDS',branch:'uat_1.2'}
+                                {id:'CodeSmells',branch:'develop'}
             ]
         }
     },
@@ -26,8 +25,8 @@ var config = {
         {
             id: 'DFW-Server',
             displayName: "UDS Server Monitoring",
-            changesInfoUrl: "http://localhost:5000/app/teamcity/builds/buildType:(id:#BUILD_ID#),sinceChange:#SINCE_CHANGE#,branch:#BRANCH#",
-            buildInfoURL: "http://localhost:5000/app/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
+            changesInfoUrl: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),sinceChange:#SINCE_CHANGE#,branch:#BRANCH#",
+            buildInfoURL: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
             builds: [
                 {id:'Memory',branch:'develop'},
                 {id:'Cpu',branch:'develop'},
@@ -40,19 +39,18 @@ var config = {
         {
                     id: 'DFW-Module',
                     displayName: "Module Builds",
-                    changesInfoUrl: "http://localhost:5000/app/teamcity/builds/buildType:(id:#BUILD_ID#),sinceChange:#SINCE_CHANGE#,branch:#BRANCH#",
-                    buildInfoURL: "http://localhost:5000/app/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
+                    changesInfoUrl: "http://localhost:5000/api/changes/#BUILD_ID#/#BRANCH#",
+                    buildInfoURL: "http://localhost:5000/api/#BUILD_ID#/#BRANCH#",
                     builds: [
-                        {id:'Orchestration',branch:'develop'},
-                        {id:'Registration',branch:'develop'},
-                        {id:'Ingestion',branch:'develop'},
-                        {id:'Discovery',branch:'develop'},
-                        {id:'Portal',branch:'develop'},
-                        {id:'Security',branch:'develop'},
-                        {id:'Services',branch:'develop'},
-                        {id:'Commons',branch:'develop'},
-                        {id:'Core',branch:'develop'},
-                        {id:'Utilities',branch:'develop'},
+                        {id:'orchestration',branch:'develop'},
+                        {id:'registration',branch:'develop'},
+                        {id:'ingestion',branch:'develop'},
+                        {id:'discovery',branch:'develop'},
+                        {id:'portal',branch:'develop'},
+                        {id:'security',branch:'develop'},
+                        {id:'services',branch:'develop'},
+                        {id:'commons',branch:'develop'},
+                        {id:'core',branch:'develop'},
                         {id:'Maintenance',branch:'develop'}
                     ]
                 }

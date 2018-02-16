@@ -412,29 +412,29 @@ var reformatDate = function (date) {
     }
 
     var handleResponse = function (rsp, containerId, config, buildId, buildBranch) {
-        var id = rsp.buildTypeId,
+        var id = buildId,
             cntr = $(containerId).find('#' + id),
-            lastChange = parseTCDate(rsp.finishDate);
+            lastChange = parseTCDate(rsp.timestamp);
 
-        cntr.find('.project-name').text(rsp.buildType.projectName + " (" + rsp.state + ")");
+        cntr.find('.project-name').text(buildId + " (" + rsp.status + ")");
         cntr.find('.pending-changes').text('');
         cntr.find('.pending-changes').removeClass('delayed')
-        cntr.find('.build-name').text(shrinkText(rsp.buildType.name + (rsp.branchName ? ' - ' + rsp.branchName : ''), 40));
+        cntr.find('.build-name').text(shrinkText(buildId + (rsp.branch ? ' - ' + rsp.branch : ''), 40));
         if (rsp.running){
                 cntr.addClass('running')
                 var runInfo = rsp['running-info'];
                 if(runInfo.elapsedSeconds > runInfo.estimatedTotalSeconds){
-                        cntr.find('.build-date').text('overtime: ' + reformatTime(1000 * (runInfo.elapsedSeconds - runInfo.estimatedTotalSeconds)));
+                        cntr.find('.build-date').text('overtime: ' + reformatTime(1000 * (rsp.elapsedSeconds - rsp.estimatedTotalSeconds)));
                         cntr.addClass('overtime');
                 } else {
-                        cntr.find('.build-date').text('running: ' + reformatTime(1000 * runInfo.elapsedSeconds));
+                        cntr.find('.build-date').text('running: ' + reformatTime(1000 * rsp.elapsedSeconds));
                         cntr.removeClass('overtime');
                 }
         } else {
-                if (rsp.status != 'SUCCESS')
+                if (rsp.status != 'success')
                 {
-                    var pendingChanges = getPendingChanges(config, buildId, buildBranch)
-                    if (pendingChanges > 5)
+                    var pendingChanges = rsp.pendingChanges;
+                    if (pendingChanges > 3)
                     {
                         cntr.find('.pending-changes').text("Changes since last commit " + pendingChanges);
                         cntr.find('.pending-changes').addClass('delayed')
@@ -443,9 +443,9 @@ var reformatDate = function (date) {
                 cntr.removeClass('running')
                 cntr.find('.build-date').text(lastChange ? "finished " + reformatDate(lastChange) : "unknown");
         }
-        cntr.find('.committers').text(getUniqueCommiters(rsp.lastChanges));
-        cntr.find('.text-status').text(rsp.statusText);
-        cntr.removeClass('old success failure hidden').addClass(getStatusClass(rsp.status));
+        cntr.find('.committers').text(rsp.commitedBy);
+        cntr.find('.text-status').text(rsp.status);
+        cntr.removeClass('old success failure hidden').addClass(rsp.status);
 
         if (!rsp.running && new Date().getTime() - lastChange > 7 * DAY) {
             cntr.addClass('old');
@@ -462,7 +462,7 @@ var reformatDate = function (date) {
                 cntr.find('.pending-changes').text('');
                 cntr.find('.pending-changes').removeClass('delayed')
                 if(id=="UDS") {
-                    cntr.find('.build-name').text(shrinkText(rsp.buildType.name + (rsp.branchName ? ' - ' + rsp.branchName : ''), 40));
+                    cntr.find('.build-name').text(shrinkText(rsp.buildType.name + (rsp.branch ? ' - ' + rsp.branchName : ''), 40));
                 } else {
                     cntr.find('.build-name').text(shrinkText(rsp.buildType.name /* (rsp.branchName ? ' - ' + rsp.branchName : ''),*/, 40));
                 }
