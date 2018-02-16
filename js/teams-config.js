@@ -51,7 +51,7 @@ var config = {
                         {id:'services',branch:'develop'},
                         {id:'commons',branch:'develop'},
                         {id:'core',branch:'develop'},
-                        {id:'Maintenance',branch:'develop'}
+                        {id:'maintenance',branch:'develop'}
                     ]
                 }
     ]
