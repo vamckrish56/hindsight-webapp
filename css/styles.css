@@ -185,23 +185,23 @@ a {
     background-color: #255e11;
 }
 
-.server-build.success.diskspace {
+.server-build.diskspace {
     background-color: #255e11;
     text-align: center;
 }
-.server-build.success.database {
+.server-build.database {
     background-color: #f44271;
     text-align: center;
 }
-.server-build.success.cpu {
+.server-build.cpu {
     background-color: #f44141;
     text-align: center;
 }
-.server-build.success.dataload {
+.server-build.dataload {
     background-color: orange;
     text-align: center;
 }
-.server-build.success.consumption {
+.server-build.consumption {
     background-color: orange;
     text-align: center;
 }
@@ -297,7 +297,7 @@ a {
     padding: 0px 10px;
 }
 
-.server-build .text-status-server-dataload {
+.server-build .text-status-server-consumption {
     float: center;
 	font-size: 25px;
     padding: 0px 10px;

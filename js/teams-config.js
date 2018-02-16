@@ -25,15 +25,14 @@ var config = {
         {
             id: 'DFW-Server',
             displayName: "UDS Server Monitoring",
-            changesInfoUrl: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),sinceChange:#SINCE_CHANGE#,branch:#BRANCH#",
-            buildInfoURL: "http://localhost:5000/api/teamcity/builds/buildType:(id:#BUILD_ID#),running:any,branch:#BRANCH#",
+            changesInfoUrl: "http://localhost:5000/api/stats",
+            buildInfoURL: "http://localhost:5000/api/stats",
             builds: [
-                {id:'Memory',branch:'develop'},
-                {id:'Cpu',branch:'develop'},
-                {id:'Diskspace',branch:'develop'},
-                {id:'Database',branch:'develop'},
-                {id:'DataLoad',branch:'develop'},
-                {id:'Consumption',branch:'develop'}
+                {id:'memory',branch:'develop'},
+                {id:'cpu',branch:'develop'},
+                {id:'diskspace',branch:'develop'},
+                {id:'database',branch:'develop'},
+                {id:'ingestion',branch:'develop'}
             ]
         },
         {

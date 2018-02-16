@@ -507,15 +507,15 @@ var reformatDate = function (date) {
             };
 
     var handleServerResponse = function (rsp, containerId, config, buildId, buildBranch) {
-            var id = rsp.buildTypeId,
+            var id = buildId,
                 cntr = $(containerId).find('#' + id),
-                lastChange = parseTCDate(rsp.finishDate);
+                lastChange = parseTCDate(rsp.timestamp);
 
-            cntr.find('.project-name').text(rsp.buildType.projectName + " (" + rsp.state + ")");
+            cntr.find('.project-name').text(buildId + " (" + rsp.status + ")");
             cntr.find('.pending-changes').text('');
             cntr.find('.pending-changes').removeClass('delayed')
 
-                cntr.find('.build-name').text(shrinkText(rsp.buildType.name /* (rsp.branchName ? ' - ' + rsp.branchName : ''),*/, 40));
+                cntr.find('.build-name').text(shrinkText(buildId /* (rsp.branchName ? ' - ' + rsp.branchName : ''),*/, 40));
                     cntr.removeClass('overtime');
                     cntr.removeClass('running')
 
@@ -523,24 +523,24 @@ var reformatDate = function (date) {
             cntr.find('.text-status-server').text(rsp.statusText);
             cntr.removeClass('old success failure hidden').addClass(getStatusClass(rsp.status));
 
-            if (id == "Memory") {
+            if (id == "memory") {
                 cntr.addClass('memory');
+                cntr.find('.text-status-server').text(rsp.memory);
             }
-            if (id == "Diskspace") {
+            if (id == "diskspace") {
                 cntr.addClass('diskspace');
-            }if (id == "Cpu") {
+                cntr.find('.text-status-server').text(rsp.diskspace);
+            }if (id == "cpu") {
                 cntr.addClass('cpu');
-            }if (id == "Database") {
+                cntr.find('.text-status-server').text(rsp.cpu);
+            }if (id == "database") {
                 cntr.addClass('database');
-            }if (id == "DataLoad") {
-                cntr.addClass('dataload');
-                cntr.removeClass('.text-status-server');
-                cntr.addClass('.text-status-server-dataload');
-                cntr.find('.text-status-server-dataload').text(rsp.statusText);
-
-                cntr.find('.time-to-complete-server').text(rsp.timeToComplete)
-            }if (id == "Consumption") {
+                cntr.find('.text-status-server').text(rsp.database);
+            }if (id == "ingestion") {
                 cntr.addClass('consumption');
+                cntr.removeClass('.text-status-server');
+                cntr.addClass('.text-status-server-consumption');
+                cntr.find('.text-status-server').text(rsp.ingestion);
             }
         };
 
